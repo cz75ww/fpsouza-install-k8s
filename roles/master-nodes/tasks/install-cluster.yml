@@ -50,14 +50,21 @@
     - cp -i /etc/kubernetes/admin.conf /home/ubuntu/.kube/config
     - chown ubuntu:ubuntu /home/ubuntu/.kube/config
 
+- name: Copy file with owner and permissions
+  ansible.builtin.copy:
+    src: files/flannel.yml
+    dest: /home/ubuntu/infra-as-code/fpsouza-install-k8s
+    owner: ubuntu
+    group: ubuntu
+    mode: '0755'
+
 - name: Make sure service has time to start
   ansible.builtin.pause:
     minutes: 1
   when: not ansible_check_mode
 
 - name: Install calico pod network
-  become: false
-  command: kubectl apply -f https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml
+  command: kubectl apply -f /home/ubuntu/infra-as-code/fpsouza-install-k8s/flannel.yml
 
 - name: Generate join command
   command: kubeadm token create --print-join-command
