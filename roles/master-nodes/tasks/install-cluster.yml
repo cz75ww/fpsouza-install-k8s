@@ -17,6 +17,8 @@
     update_cache: yes
   vars:
     packages:
+      - openshift
+      - pyyaml
       - kubelet 
       - kubeadm 
       - kubectl
