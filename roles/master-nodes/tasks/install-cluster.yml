@@ -50,6 +50,11 @@
     - cp -i /etc/kubernetes/admin.conf /home/ubuntu/.kube/config
     - chown ubuntu:ubuntu /home/ubuntu/.kube/config
 
+- name: Make sure service has time to start or stop
+  ansible.builtin.pause:
+    minutes: 1
+  when: not ansible_check_mode
+
 - name: Install calico pod network
   become: false
   command: kubectl create -f https://docs.projectcalico.org/v3.4/getting-started/kubernetes/installation/hosted/calico.yaml
