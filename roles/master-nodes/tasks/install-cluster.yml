@@ -33,9 +33,12 @@
 
 - name: Restart kubelet
   service:
-    name: kubelet
+    name: "{{ item }}"
     daemon_reload: yes
     state: restarted
+  with_items:
+    - kubelet
+    - containerd
 
 - name: Initialize the Kubernetes cluster using kubeadm
   command: kubeadm init --apiserver-advertise-address="{{ ansible_default_ipv4.address }}" --apiserver-cert-extra-sans="{{ ansible_default_ipv4.address }}"  --node-name k8s-master --pod-network-cidr=192.168.0.0/16

@@ -15,6 +15,7 @@
 enabled_plugin = ["cri"]
 [plugins."io.containerd.grpc.v1.cri".containerd]
 endpoint = "unix:///var/run/containerd/containerd.sock"
+SystemdCgroup = true
 
 #root = "/var/lib/containerd"
 #state = "/run/containerd"
