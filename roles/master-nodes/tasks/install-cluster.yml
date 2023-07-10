@@ -63,8 +63,10 @@
     minutes: 1
   when: not ansible_check_mode
 
-- name: Install calico pod network
-  command: kubectl apply -f /home/ubuntu/infra-as-code/fpsouza-install-k8s/flannel.yml
+- name: Install flannel pod network
+  kubernetes.core.k8s:
+    state: present
+    src: /home/ubuntu/infra-as-code/fpsouza-install-k8s/flannel.yml
 
 - name: Generate join command
   command: kubeadm token create --print-join-command
