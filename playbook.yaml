@@ -8,4 +8,7 @@
   roles:
   - ./roles/master-nodes
   tags: master-nodes
+
+  - ./roles/worker-nodes
+  tags: worker-nodes
  
