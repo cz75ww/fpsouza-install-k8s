@@ -1,2 +1,4 @@
 ---
-# tasks file for worker-nodes
+- include_tasks: install-docker-comp.yml
+- include_tasks: disable-swap.yml
+- include_tasks: install-nodes.yml 

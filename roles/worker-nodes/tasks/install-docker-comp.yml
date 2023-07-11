@@ -1,0 +1,31 @@
+---
+- name: Waiting for cluster set up
+  ansible.builtin.pause:
+    minutes: 5
+  when: not ansible_check_mode
+
+- name: Install docker and its dependecies
+  apt:
+    name: "{{ packages }}"
+    state: present
+    update_cache: yes
+  vars:
+    packages:
+    - docker-ce
+    - docker-ce-cli
+    - containerd.io
+    - docker-buildx-plugin
+    - docker-compose-plugin
+
+- name: Add ubuntu user to docker group
+  user:
+    name: ubuntu
+    group: docker
+
+- name: Copy file with owner and permissions
+  ansible.builtin.copy:
+    src: files/config.toml
+    dest: /etc/containerd/config.toml
+    owner: root
+    group: root
+    mode: '0644'
