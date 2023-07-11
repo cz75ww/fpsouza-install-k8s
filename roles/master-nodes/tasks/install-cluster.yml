@@ -71,14 +71,14 @@
     minutes: 1
   when: not ansible_check_mode
 
-- name: Install flannel pod network
-  kubernetes.core.k8s:
-    state: present
-    src: /home/ubuntu/infra-as-code/fpsouza-install-k8s/flannel.yml
+# - name: Install flannel pod network
+#   kubernetes.core.k8s:
+#     state: present
+#     src: /home/ubuntu/infra-as-code/fpsouza-install-k8s/flannel.yml
 
-- name: Generate join command
-  command: kubeadm token create --print-join-command
-  register: join_command
+# - name: Generate join command
+#   command: kubeadm token create --print-join-command
+#   register: join_command
 
-- name: Copy join command to local file
-  local_action: copy content="{{ join_command.stdout_lines[0] }}" dest="./join-command"
+# - name: Copy join command to local file
+#   local_action: copy content="{{ join_command.stdout_lines[0] }}" dest="./join-command"
