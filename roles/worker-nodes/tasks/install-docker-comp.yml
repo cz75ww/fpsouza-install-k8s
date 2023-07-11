@@ -1,7 +1,7 @@
 ---
 - name: Waiting for cluster set up
   ansible.builtin.pause:
-    minutes: 5
+    minutes: 2
   when: not ansible_check_mode
 
 - name: Install docker and its dependecies
