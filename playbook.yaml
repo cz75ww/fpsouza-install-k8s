@@ -18,5 +18,3 @@
   roles:
   - ./roles/worker-nodes
   tags: worker-nodes
-
- 
