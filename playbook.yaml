@@ -1,5 +1,5 @@
 ---
-- name: Applying custom tasks on EC2 instance
+- name: Installing K8S cluster
   hosts: localhost
   connection: local
   gather_facts: yes
@@ -9,6 +9,14 @@
   - ./roles/master-nodes
   tags: master-nodes
 
+- name: Installing worker nodes
+  hosts: localhost
+  connection: local
+  gather_facts: yes
+  become: yes
+
+  roles:
   - ./roles/worker-nodes
   tags: worker-nodes
+
  
