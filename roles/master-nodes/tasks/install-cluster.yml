@@ -51,12 +51,16 @@
 - name: Initialize the Kubernetes cluster using kubeadm
   command: kubeadm init --apiserver-advertise-address="{{ ansible_default_ipv4.address }}" --apiserver-cert-extra-sans="{{ ansible_default_ipv4.address }}"  --node-name k8s-master --pod-network-cidr=10.244.0.0/16
 
-- name: Setup kubeconfig for ubuntu user
-  command: "{{ item }}"
-  with_items:
-    - mkdir -p /home/ubuntu/.kube
-    - cp -i /etc/kubernetes/admin.conf /home/ubuntu/.kube/config
-    - chown ubuntu:ubuntu /home/ubuntu/.kube/config
+- name: Criando o diretorio .kube
+  file: 
+    path: ~/.kube
+    state: directory
+
+- name: Linkando o arquivo admin.conf para o ~/.kube/config
+  file:
+    src: /etc/kubernetes/admin.conf
+    dest: ~/.kube/config
+    state: link
 
 - name: Copy file with owner and permissions
   ansible.builtin.copy:
