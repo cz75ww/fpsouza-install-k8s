@@ -56,8 +56,9 @@
   with_items:
     - mkdir -p /home/ubuntu/.kube
     - cp -i /etc/kubernetes/admin.conf /home/ubuntu/.kube/config
-    - cp -i /etc/kubernetes/admin.conf /kubernetes
+    - cp -i /etc/kubernetes/admin.conf /kubernetes/config
     - chown ubuntu:ubuntu /home/ubuntu/.kube/config
+    - chown ubuntu:ubuntu /kubernetes/config
 
 - name: Copy file with owner and permissions
   ansible.builtin.copy:
