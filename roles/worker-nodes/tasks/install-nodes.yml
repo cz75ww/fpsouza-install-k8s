@@ -22,23 +22,6 @@
       - kubeadm 
       - kubectl
 
-# - name: Install bottle python package
-#   pip:
-#     name: "{{ item }}"
-#   with_items:
-#    - openshift
-#    - pyyaml
-
-# - name: Get IP Addresses
-#   shell: "ifconfig eth0 | grep inet | head -1 | awk '{print $2}'"
-#   register: node_ip
-
-# - name: Configure node ip
-#   lineinfile:
-#     path: /etc/default/kubelet
-#     line: KUBELET_EXTRA_ARGS=--node-ip={{ ansible_default_ipv4.address }}
-#     create: yes
-
 - name: Restart kubelet
   service:
     name: "{{ item }}"
@@ -47,6 +30,14 @@
   with_items:
     - kubelet
     - containerd
+
+- name: Setup kubeconfig for ubuntu user
+  command: "{{ item }}"
+  with_items:
+    - mkdir -p /home/ubuntu/.kube
+    - cp -i /etc/kubernetes/admin.conf /home/ubuntu/.kube/config
+    - chown ubuntu:ubuntu /home/ubuntu/.kube/config
+
 
 - name: Reset the cluster environment
   command: 
