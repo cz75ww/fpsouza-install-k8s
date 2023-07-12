@@ -54,12 +54,9 @@
 - name: Setup kubeconfig for ubuntu user
   command: "{{ item }}"
   with_items:
-    - rm -rf /kubernetes/config
     - mkdir -p /home/ubuntu/.kube
     - cp -i /etc/kubernetes/admin.conf /home/ubuntu/.kube/config
-    - cp -i /etc/kubernetes/admin.conf /kubernetes/config
     - chown ubuntu:ubuntu /home/ubuntu/.kube/config
-    - chown ubuntu:ubuntu /kubernetes/config
 
 - name: Copy file with owner and permissions
   ansible.builtin.copy:
@@ -87,4 +84,10 @@
 
 - name: Copy join command to local file
   local_action: copy content="{{ join_command.stdout_lines[0] }}" dest="/kubernetes/join-command"
+
+ name: Setup config file on NFS for work-nodes
+  command: "{{ item }}"
+  with_items:
+    - cp -i /home/ubuntu/.kube/config /kubernetes/config
+    - chown ubuntu:ubuntu /kubernetes/config
   
