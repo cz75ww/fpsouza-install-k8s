@@ -48,8 +48,9 @@
     - kubelet
     - containerd
 
-- name: Initialize the Kubernetes cluster using kubeadm
-  command: kubeadm init --apiserver-advertise-address="{{ ansible_default_ipv4.address }}" --apiserver-cert-extra-sans="{{ ansible_default_ipv4.address }}"  --node-name k8s-master --pod-network-cidr=10.244.0.0/16
+- name: Removendo o cluster
+  command: 
+    kubeadm reset --force
 
 - name: Copy the join command to server location
   copy: src=/kubernetes/join-command dest=/kubernetes/join-command.sh mode=0777
