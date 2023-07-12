@@ -35,7 +35,7 @@
   command: "{{ item }}"
   with_items:
     - mkdir -p /home/ubuntu/.kube
-    - cp -i /kubernetes/config /home/ubuntu/.kube/config
+    - cp -p /kubernetes/config /home/ubuntu/.kube/config
     - chown ubuntu:ubuntu /home/ubuntu/.kube/config
     - chmod 600 /home/ubuntu/.kube/config
 
