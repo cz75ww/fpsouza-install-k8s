@@ -56,6 +56,7 @@
   with_items:
     - mkdir -p /home/ubuntu/.kube
     - cp -i /etc/kubernetes/admin.conf /home/ubuntu/.kube/config
+    - cp -i /etc/kubernetes/admin.conf /kubernetes
     - chown ubuntu:ubuntu /home/ubuntu/.kube/config
 
 - name: Copy file with owner and permissions
@@ -84,4 +85,6 @@
 
 - name: Copy join command to local file
   local_action: copy content="{{ join_command.stdout_lines[0] }}" dest="/kubernetes/join-command"
+
+- name: 
   
