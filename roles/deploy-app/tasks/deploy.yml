@@ -7,7 +7,7 @@
 
 - name: Copy file with owner and permissions
   ansible.builtin.copy:
-    src: files/"{{ item }}"
+    src: "files/{{ item }}"
     dest: /kubernetes/deploy/
     mode: '0644'
   with_items:
@@ -27,7 +27,7 @@
 - name: Building the application
   kubernetes.core.k8s:
     state: present
-    src: /kubernetes/deploy/"{{ item }}"
+    src: "/kubernetes/deploy/{{ item }}"
   with_items:
     - metrics-server.yml
     - deployment.yml
