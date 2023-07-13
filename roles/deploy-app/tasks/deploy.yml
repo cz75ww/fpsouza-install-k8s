@@ -33,3 +33,5 @@
     - persistent-volume.yml
     - persistent-volume-claim.yml
     - autoscaling.yml
+  become: true
+  become_user: ubuntu
