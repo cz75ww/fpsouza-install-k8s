@@ -18,11 +18,11 @@
     - persistent-volume-claim.yml
     - service.yml
 
-- name: Copy index.html file 
-  ansible.builtin.copy:
-    src: files/index.html
-    dest: /kubernetes/nginx/
-    mode: '0644'
+# - name: Copy index.html file 
+#   ansible.builtin.copy:
+#     src: files/index.html
+#     dest: /kubernetes/nginx/
+#     mode: '0644'
   
 - name: Building the application
   shell: "kubectl apply -f /kubernetes/deploy/{{ item }}"  

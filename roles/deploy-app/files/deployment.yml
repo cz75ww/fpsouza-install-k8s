@@ -25,11 +25,11 @@ spec:
             cpu: 50m
           requests:
             cpu: 25m
-        volumeMounts:
-        - mountPath: "/usr/share/nginx/html"
-          name: nginx-volume 
-      volumes:
-      - name: nginx-volume
-        persistentVolumeClaim:
-          claimName: nginx
+      #   volumeMounts:
+      #   - mountPath: "/usr/share/nginx/html"
+      #     name: nginx-volume 
+      # volumes:
+      # - name: nginx-volume
+      #   persistentVolumeClaim:
+      #     claimName: nginx
 status: {}
