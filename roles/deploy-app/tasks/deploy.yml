@@ -1,0 +1,41 @@
+  
+- name: create web diretory
+  file:
+    path: /kubernetes/deploy
+    state: directory
+    mode: '0775'
+    owner: "nginx"
+    group: "nginx"
+
+- name: Copy file with owner and permissions
+  ansible.builtin.copy:
+    src: ../file/"{{ item }}"
+    dest: /kubernetes/deploy/
+    owner: "nginx"
+    group: "nginx"
+    mode: '0644'
+  with_items:
+    - autoscaling.yml
+    - deployment.yml
+    - metrics-server.yml
+    - persistent-volume.yml
+    - persistent-volume-claim.yml
+    - service.yml
+
+- name: Copy index.html file 
+  ansible.builtin.copy:
+    src: ../file/index.html
+    dest: /kubernetes/nginx/
+    mode: '0644'
+  
+- name: Building the application
+  kubernetes.core.k8s:
+    state: present
+    src: /kubernetes/deploy/"{{ item }}"
+  with_items:
+    - metrics-server.yml
+    - deployment.yml
+    - service.yml
+    - persistent-volume.yml
+    - persistent-volume-claim.yml
+    - autoscaling.yml

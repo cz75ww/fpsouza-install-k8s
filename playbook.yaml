@@ -18,3 +18,15 @@
   roles:
   - ./roles/worker-nodes
   tags: worker-nodes
+
+  - name: Deploying nginx
+  hosts: localhost
+  connection: local
+  gather_facts: yes
+  become: yes
+
+  roles:
+  - ./roles/deploy-app
+  tags: nginx-deploy
+
+
