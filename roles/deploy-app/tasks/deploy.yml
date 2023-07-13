@@ -7,7 +7,7 @@
 
 - name: Copy file with owner and permissions
   ansible.builtin.copy:
-    src: ../file/"{{ item }}"
+    src: file/"{{ item }}"
     dest: /kubernetes/deploy/
     mode: '0644'
   with_items:
@@ -20,7 +20,7 @@
 
 - name: Copy index.html file 
   ansible.builtin.copy:
-    src: ../file/index.html
+    src: file/index.html
     dest: /kubernetes/nginx/
     mode: '0644'
   
