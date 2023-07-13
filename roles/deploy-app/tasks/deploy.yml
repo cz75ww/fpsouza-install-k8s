@@ -25,9 +25,7 @@
     mode: '0644'
   
 - name: Building the application
-  kubernetes.core.k8s:
-    state: present
-    src: "/kubernetes/deploy/{{ item }}"
+  shell: "kubectl apply -f /kubernetes/deploy/{{ item }}"  
   with_items:
     - metrics-server.yml
     - deployment.yml
