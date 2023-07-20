@@ -29,9 +29,9 @@
    - openshift
    - pyyaml
 
-- name: Get IP Addresses
-  shell: "ifconfig eth0 | grep inet | head -1 | awk '{print $2}'"
-  register: node_ip
+# - name: Get IP Addresses
+#   shell: "ifconfig eth0 | grep inet | head -1 | awk '{print $2}'"
+#   register: node_ip
 
 - name: Configure node ip
   lineinfile:
