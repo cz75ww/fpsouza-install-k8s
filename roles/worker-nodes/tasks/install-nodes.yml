@@ -31,6 +31,11 @@
     - kubelet
     - containerd
 
+- name: Waiting for EFS be already
+  ansible.builtin.pause:
+    minutes: 2
+  when: not ansible_check_mode
+
 - name: Setup kubeconfig for ubuntu user
   command: "{{ item }}"
   with_items:
