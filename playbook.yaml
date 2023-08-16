@@ -25,8 +25,8 @@
   gather_facts: yes
   become: yes
 
-  roles:
-  - ./roles/deploy-app
-  tags: nginx-deploy
+  # roles:
+  # - ./roles/deploy-app
+  # tags: nginx-deploy
 
 
